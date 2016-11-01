@@ -1,4 +1,4 @@
 @ECHO OFF
 CLS
-cd src\Api
+cd src\JavaScriptClient
 dotnet run
