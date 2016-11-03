@@ -1,4 +1,4 @@
 @ECHO OFF
 CLS
-cd src\JavaScriptClient
+cd src\ServerSide\IdentityServerClients\JavaScriptClient
 dotnet run

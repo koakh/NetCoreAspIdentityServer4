@@ -1,4 +1,4 @@
 @ECHO OFF
 CLS
-cd src\MvcClient
+cd src\ServerSide\IdentityServerClients\MvcClient
 dotnet run

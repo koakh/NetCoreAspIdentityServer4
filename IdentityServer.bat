@@ -1,5 +1,5 @@
 @ECHO OFF
 CLS
-REM cd src\QuickstartIdentityServer
-cd src\IdentityServerWithAspNetIdentity
+REM cd src\ServerSide\IdentityServerQuickstart
+cd src\ServerSide\IdentityServerWithAspNetIdentity
 dotnet run

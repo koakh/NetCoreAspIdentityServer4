@@ -15,3 +15,9 @@ luis.santos@logicpulse.com : Lpt#2016
 
 alice : password
 bob : password
+
+
+
+Identity Server
+- [Discovery document](http://localhost:5000/.well-known/openid-configuration)
+
