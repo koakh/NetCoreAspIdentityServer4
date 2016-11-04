@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DFF21B2A-7F52-448D-8867-D1C4EEAF73A7}"
 	ProjectSection(SolutionItems) = preProject
 		Api.bat = Api.bat
+		DotNetRun.cmd = DotNetRun.cmd
 		global.json = global.json
 		IdentityServer.bat = IdentityServer.bat
 		JavaScriptClient.bat = JavaScriptClient.bat
