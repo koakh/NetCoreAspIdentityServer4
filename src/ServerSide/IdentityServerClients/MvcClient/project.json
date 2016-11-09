@@ -22,7 +22,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.1.0-preview1-final",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0-preview1-final",
     "IdentityModel": "2.0.0",
-    "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.1.0-preview1-final"
+    "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.1.0-preview1-final",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1"
   },
 
   "tools": {
