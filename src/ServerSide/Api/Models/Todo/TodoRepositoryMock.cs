@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Api.Models.ToDo
 {
-    public class TodoRepository : ITodoRepository
+    public class TodoRepositoryMock : ITodoRepository
     {
         private static ConcurrentDictionary<string, TodoItem> _todos = new ConcurrentDictionary<string, TodoItem>();
 
-        public TodoRepository()
+        public TodoRepositoryMock()
         {
             //Add(new TodoItem { Name = "Item1" });
             Add(new TodoItem { Name = "Item1" });
@@ -25,15 +25,15 @@ namespace Api.Models.ToDo
             Add(new TodoItem { Name = "Zontrax" });
         }
 
+        public IEnumerable<TodoItem> GetAll()
+        {
+            return _todos.Values;
+        }
+
         public void Add(TodoItem item)
         {
             item.Key = Guid.NewGuid().ToString();
             _todos[item.Key] = item;
-        }
-
-        public IEnumerable<TodoItem> GetAll()
-        {
-            return _todos.Values;
         }
 
         public TodoItem Find(string key)

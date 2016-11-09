@@ -1,9 +1,9 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-using Api.Models.Todo;
+﻿using Api.Data;
+using Api.Models.Movie;
+using Api.Models.ToDo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -19,15 +19,31 @@ namespace Api
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
+            //User-Secrets
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets();
+            }
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            //Using Secrets
+            string DB_HOST = Configuration["DB_HOST"];
+            string DB_DATA = Configuration["DB_DATA"];
+            string DB_USER = Configuration["DB_USER"];
+            string DB_PASS = Configuration["DB_PASS"];
         }
 
         public IConfigurationRoot Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options=>
+            //Register the ApplicationDbContext in DI container
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddCors(options =>
             {
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
@@ -42,8 +58,9 @@ namespace Api
                 .AddAuthorization()
                 .AddJsonFormatters();
 
-            // Register the repositories
+            //Register the repositories in DI container
             services.AddSingleton<ITodoRepository, TodoRepository>();
+            services.AddSingleton<IMovieRepository, MovieRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -62,7 +79,11 @@ namespace Api
                 RequireHttpsMetadata = false
             });
 
+            //Use Mvc
             app.UseMvc();
+
+            //Seed Data
+            SeedData.Initialize(app.ApplicationServices);
         }
     }
 }
