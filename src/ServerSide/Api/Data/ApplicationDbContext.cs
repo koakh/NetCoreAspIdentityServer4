@@ -9,7 +9,7 @@ namespace Api.Data
         //Movie
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Actor> Actor { get; set; }
-        public DbSet<MovieReviews> Reviews { get; set; }
+        public DbSet<MovieReview> Reviews { get; set; }
         //Blog
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Api.Models.Blog
 {
-    //[Table("Tag")]
+    [Table("tag")]
     public class Tag
     {
         //The ID field is required by the DB for the primary key

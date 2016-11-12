@@ -36,6 +36,6 @@ namespace Api.Models.Movie
 
         public List<MovieActor> MovieActors { get; set; }
 
-        public List<MovieReviews> Reviews { get; set; }
+        public List<MovieReview> Reviews { get; set; }
     }
 }

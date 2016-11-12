@@ -103,14 +103,15 @@ namespace Api.Data
                                 Genre = "Romantic Comedy",
                                 Price = 7.99M,
                                 Rating = "C",
-                                //Actors = new List<Actor>()
-                                //{
-                                //    actorFake1, actorFake2
-                                //},
-                                Reviews = new List<MovieReviews>()
+                                MovieActors = new List<MovieActor>()
                                 {
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
+                                    new MovieActor() { Actor = actorFake1 },
+                                    new MovieActor() { Actor = actorFake2 }
+                                },
+                                Reviews = new List<MovieReview>()
+                                {
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
                                 }
                             },
 
@@ -121,14 +122,15 @@ namespace Api.Data
                                 Genre = "Comedy",
                                 Price = 8.99M,
                                 Rating = "A",
-                                //Actors = new List<Actor>()
-                                //{
-                                //    actorFake2, actorFake3
-                                //},
-                                Reviews = new List<MovieReviews>()
+                                MovieActors = new List<MovieActor>()
                                 {
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
+                                    new MovieActor() { Actor = actorFake2 },
+                                    new MovieActor() { Actor = actorFake3 }
+                                },
+                                Reviews = new List<MovieReview>()
+                                {
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
                                 }
                             },
 
@@ -139,14 +141,15 @@ namespace Api.Data
                                 Genre = "Comedy",
                                 Price = 9.99M,
                                 Rating = "B",
-                                //Actors = new List<Actor>()
-                                //{
-                                //    actorFake3, actorFake4
-                                //},
-                                Reviews = new List<MovieReviews>()
+                                MovieActors = new List<MovieActor>()
                                 {
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
+                                    new MovieActor() { Actor = actorFake3 },
+                                    new MovieActor() { Actor = actorFake4 }
+                                },
+                                Reviews = new List<MovieReview>()
+                                {
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
                                 }
                             },
 
@@ -157,14 +160,15 @@ namespace Api.Data
                                 Genre = "Western",
                                 Price = 3.99M,
                                 Rating = "D",
-                                //Actors = new List<Actor>()
-                                //{
-                                //    actorFake4, actorFake5
-                                //},
-                                Reviews = new List<MovieReviews>()
+                                MovieActors = new List<MovieActor>()
                                 {
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
+                                    new MovieActor() { Actor = actorFake4 },
+                                    new MovieActor() { Actor = actorFake5 }
+                                },
+                                Reviews = new List<MovieReview>()
+                                {
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
                                 }
                             },
 
@@ -175,14 +179,15 @@ namespace Api.Data
                                 Genre = "Comedy",
                                 Price = 2.99M,
                                 Rating = "D",
-                                //Actors = new List<Actor>()
-                                //{
-                                //    actorFake5, actorFake6
-                                //},
-                                Reviews = new List<MovieReviews>()
+                                MovieActors = new List<MovieActor>()
                                 {
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
-                                    new MovieReviews() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
+                                    new MovieActor() { Actor = actorFake5 },
+                                    new MovieActor() { Actor = actorFake6 }
+                                },
+                                Reviews = new List<MovieReview>()
+                                {
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() },
+                                    new MovieReview() { Title = faker.Lorem.Word(), Review = faker.Lorem.Sentence() }
                                 }
                             }
                         );
@@ -193,7 +198,7 @@ namespace Api.Data
                 if (context.Reviews.Any())
                 {
                     context.Reviews.AddRange(
-                        new MovieReviews
+                        new MovieReview
                         {
                             Movie = context.Movie.First(s => s.Title.Contains("When Harry Met Sally")),
                             Title = faker.Lorem.Word(),
