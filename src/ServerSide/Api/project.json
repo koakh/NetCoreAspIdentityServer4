@@ -28,7 +28,8 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0-preview1-final",
     "Microsoft.Extensions.Logging.Debug": "1.1.0-preview1-final",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0-preview1-final",
-    "Pomelo.EntityFrameworkCore.MySql": "1.1.0-preview1-10002"
+    "Pomelo.EntityFrameworkCore.MySql": "1.1.0-preview1-10002",
+    "Bogus": "8.0.1-beta-1"
   },
 
   "tools": {

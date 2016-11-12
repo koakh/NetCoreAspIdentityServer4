@@ -34,6 +34,8 @@ namespace Api.Models.Movie
         [RegularExpression(@"^[A-E]+[a-eA-e''-'\s]*$")]
         public string Rating { get; set; }
 
+        public List<MovieActor> MovieActors { get; set; }
+
         public List<MovieReviews> Reviews { get; set; }
     }
 }

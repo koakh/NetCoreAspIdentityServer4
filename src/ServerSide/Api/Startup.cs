@@ -30,10 +30,8 @@ namespace Api
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            //Using Secrets
-            _connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
-                Configuration["DB_HOST"], Configuration["DB_DATA"], Configuration["DB_USER"], Configuration["DB_PASS"]
-            );
+            //Using Secrets to build ConnectionString
+            _connectionString = string.Format("server={0};database={1};uid={2};pwd={3}", Configuration["DB_HOST"], Configuration["DB_DATA"], Configuration["DB_USER"], Configuration["DB_PASS"]);
         }
 
         public IConfigurationRoot Configuration { get; }

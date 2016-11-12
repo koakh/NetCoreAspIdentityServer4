@@ -19,4 +19,6 @@ git push -u origin master
 
 - [Pomelo](https://docs.microsoft.com/en-us/ef/core/providers/pomelo/)
 - [Pomelo EntityFrameworkCore MySql](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/blob/master/README.md#getting-started)
-
+- [EntitiFramework Relationships](https://docs.microsoft.com/en-us/ef/core/modeling/relationships#many-to-many)
+- [Entity Framework Code First Data Annotations](https://msdn.microsoft.com/en-us/library/jj591583(v=vs.113).aspx)
+- [Bogus Help Page](https://github.com/bchavez/Bogus)

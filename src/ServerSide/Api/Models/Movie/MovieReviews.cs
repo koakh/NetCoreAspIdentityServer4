@@ -14,5 +14,8 @@ namespace Api.Models.Movie
         [Required]
         [StringLength(1024)]
         public string Review { get; set; }
+
+        [Required]
+        public Movie Movie { get; set; }
     }
 }

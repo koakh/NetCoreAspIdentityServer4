@@ -8,9 +8,10 @@ using Api.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161112212554_Changed_MovieToActor_To_MovieActor")]
+    partial class Changed_MovieToActor_To_MovieActor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-preview1-22509");
@@ -147,12 +148,12 @@ namespace Api.Migrations
             modelBuilder.Entity("Api.Models.Movie.MovieActor", b =>
                 {
                     b.HasOne("Api.Models.Movie.Actor", "Actor")
-                        .WithMany("MovieActors")
+                        .WithMany("MovieToActor")
                         .HasForeignKey("ActorID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Api.Models.Movie.Movie", "Movie")
-                        .WithMany("MovieActors")
+                        .WithMany("MovieToActor")
                         .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

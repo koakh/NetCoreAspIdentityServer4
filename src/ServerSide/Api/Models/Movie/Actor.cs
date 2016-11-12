@@ -25,6 +25,6 @@ namespace Api.Models.Movie
         [Range(1, 120)]
         public int Age { get; set; }
 
-        public List<Movie> ActInMovies { get; set; }
+        public List<MovieActor> MovieActors { get; set; }
     }
 }

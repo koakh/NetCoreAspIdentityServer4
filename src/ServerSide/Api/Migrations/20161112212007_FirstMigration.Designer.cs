@@ -8,9 +8,10 @@ using Api.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161112212007_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-preview1-22509");
@@ -97,19 +98,6 @@ namespace Api.Migrations
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("Api.Models.Movie.MovieActor", b =>
-                {
-                    b.Property<Guid>("MovieID");
-
-                    b.Property<Guid>("ActorID");
-
-                    b.HasKey("MovieID", "ActorID");
-
-                    b.HasIndex("ActorID");
-
-                    b.ToTable("MovieActor");
-                });
-
             modelBuilder.Entity("Api.Models.Movie.MovieReviews", b =>
                 {
                     b.Property<Guid>("ID")
@@ -131,6 +119,19 @@ namespace Api.Migrations
                     b.ToTable("Reviews");
                 });
 
+            modelBuilder.Entity("Api.Models.Movie.MovieToActor", b =>
+                {
+                    b.Property<Guid>("MovieID");
+
+                    b.Property<Guid>("ActorID");
+
+                    b.HasKey("MovieID", "ActorID");
+
+                    b.HasIndex("ActorID");
+
+                    b.ToTable("MovieToActor");
+                });
+
             modelBuilder.Entity("Api.Models.Blog.PostTag", b =>
                 {
                     b.HasOne("Api.Models.Blog.Post", "Post")
@@ -144,23 +145,23 @@ namespace Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Models.Movie.MovieActor", b =>
-                {
-                    b.HasOne("Api.Models.Movie.Actor", "Actor")
-                        .WithMany("MovieActors")
-                        .HasForeignKey("ActorID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Api.Models.Movie.Movie", "Movie")
-                        .WithMany("MovieActors")
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Api.Models.Movie.MovieReviews", b =>
                 {
                     b.HasOne("Api.Models.Movie.Movie", "Movie")
                         .WithMany("Reviews")
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Models.Movie.MovieToActor", b =>
+                {
+                    b.HasOne("Api.Models.Movie.Actor", "Actor")
+                        .WithMany("MovieToActor")
+                        .HasForeignKey("ActorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Models.Movie.Movie", "Movie")
+                        .WithMany("MovieToActor")
                         .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
