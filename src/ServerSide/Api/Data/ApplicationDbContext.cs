@@ -11,5 +11,8 @@ namespace Api.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    => optionsBuilder.UseMySql((@"server=localhost;database=IdentityServer4Api;uid=root;pwd=kksc28kk"));
     }
 }

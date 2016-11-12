@@ -8,14 +8,13 @@ using Api.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161110191058_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20161112183024_FirstMigrations")]
+    partial class FirstMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-preview1-22509")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.1.0-preview1-22509");
 
             modelBuilder.Entity("Api.Models.Movie.Actor", b =>
                 {

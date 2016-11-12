@@ -13,8 +13,7 @@ namespace Api.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-preview1-22509")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.1.0-preview1-22509");
 
             modelBuilder.Entity("Api.Models.Movie.Actor", b =>
                 {

@@ -12,6 +12,8 @@ namespace Api
 {
     public class Startup
     {
+        private string _connectionString;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -29,10 +31,9 @@ namespace Api
             Configuration = builder.Build();
 
             //Using Secrets
-            string DB_HOST = Configuration["DB_HOST"];
-            string DB_DATA = Configuration["DB_DATA"];
-            string DB_USER = Configuration["DB_USER"];
-            string DB_PASS = Configuration["DB_PASS"];
+            _connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
+                Configuration["DB_HOST"], Configuration["DB_DATA"], Configuration["DB_USER"], Configuration["DB_PASS"]
+            );
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -41,7 +42,8 @@ namespace Api
         {
             //Register the ApplicationDbContext in DI container
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(_connectionString));
 
             services.AddCors(options =>
             {

@@ -13,6 +13,9 @@ namespace Api.Data
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
+                // Create database
+                context.Database.EnsureCreated();
+
                 // Look for any movies.
                 if (!context.Movie.Any())
                 {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Api.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class FirstMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +13,7 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
                     Age = table.Column<int>(nullable: false),
                     BornDate = table.Column<DateTime>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 60, nullable: true),
@@ -30,7 +29,7 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
                     ActorID = table.Column<int>(nullable: true),
                     Genre = table.Column<string>(maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
