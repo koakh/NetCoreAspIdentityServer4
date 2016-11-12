@@ -7,5 +7,11 @@ git remote add origin https://github.com/koakh/NetCoreAspIdentityServer4.git
 git push -u origin master
 ```
 
-Identity Server
+**Identity Server**
+
 - [Discovery document](http://localhost:5000/.well-known/openid-configuration)
+
+**Tools**
+
+- [.NET Core CLI](https://docs.efproject.net/en/latest/miscellaneous/cli/dotnet.html)
+ 

@@ -1,6 +1,10 @@
 {
   "userSecretsId": "NetCoreAspIdentityServer4-1a15466e-5d0b-4648-8519-e4d16b8ff1b7",
   "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.1.0-preview1-001100-00",
+      "type": "platform"
+    },
     "IdentityServer4.AccessTokenValidation": "1.0.1-rc3",
     "Microsoft.AspNetCore.Cors": "1.1.0-preview1-final",
     "Microsoft.AspNetCore.Mvc.Core": "1.1.0-preview1-final",
@@ -23,11 +27,8 @@
     "Microsoft.Extensions.Logging": "1.1.0-preview1-final",
     "Microsoft.Extensions.Logging.Console": "1.1.0-preview1-final",
     "Microsoft.Extensions.Logging.Debug": "1.1.0-preview1-final",
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0-preview1-final",
-    "Microsoft.NETCore.App": {
-      "version": "1.1.0-preview1-001100-00",
-      "type": "platform"
-    }
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0-preview1-final"
+
   },
 
   "tools": {
