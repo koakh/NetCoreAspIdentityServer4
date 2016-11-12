@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Models.Movie
 {
     public class Actor
     {
         //The ID field is required by the DB for the primary key
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         public string FirstName { get; set; }

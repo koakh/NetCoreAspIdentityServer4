@@ -7,6 +7,7 @@ namespace Api.Data
     {
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Actor> Actor { get; set; }
+        public DbSet<MovieReviews> Reviews { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

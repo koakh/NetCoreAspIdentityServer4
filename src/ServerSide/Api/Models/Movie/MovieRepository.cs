@@ -1,5 +1,6 @@
 ﻿using Api.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Api.Models.Movie
             return await _context.Movie.FromSql(query).ToListAsync();
         }
 
-        public Movie Find(int key, bool readOnly = false)
+        public Movie Find(Guid key, bool readOnly = false)
         {
             var movie = (!readOnly)
                 ? _context.Movie.SingleOrDefault(m => m.ID == key)
@@ -49,7 +50,7 @@ namespace Api.Models.Movie
             _context.SaveChanges();
         }
 
-        public void Remove(int key)
+        public void Remove(Guid key)
         {
             Movie movie = Find(key); ;
             _context.Movie.Remove(movie);

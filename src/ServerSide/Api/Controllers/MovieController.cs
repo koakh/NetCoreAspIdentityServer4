@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Api.Models.Movie;
+using System;
 
 namespace Api.Controllers
 {
@@ -50,7 +51,7 @@ namespace Api.Controllers
         //If no item matches the requested ID, the method returns a 404 error.This is done by returning NotFound.
         //Otherwise, the method returns 200 with a JSON response body.This is done by returning an ObjectResult
         [HttpGet("{id}", Name = "GetMovie")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(Guid id)
         {
             var item = _repository.Find(id);
             if (item == null)
@@ -79,7 +80,7 @@ namespace Api.Controllers
         //PUT /api/<controller>/<id>
         //The response is 204 (No Content)
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] [Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie item)
+        public IActionResult Update(Guid id, [FromBody] [Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie item)
         {
             var check = _repository.Find(id, true);
             if (item == null || check != null && check.ID != id)
@@ -111,7 +112,7 @@ namespace Api.Controllers
         //PATCH /api/<controller>/<id>
         //The response is 204 (No Content)
         [HttpPatch("{id}")]
-        public IActionResult Update([FromBody] Movie item, int id)
+        public IActionResult Update([FromBody] Movie item, Guid id)
         {
             var check = _repository.Find(id);
             if (item == null || check.ID != id)
@@ -128,7 +129,7 @@ namespace Api.Controllers
         //DELETE /api/<controller>/<id>
         //The response is 204 (No Content)
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             var item = _repository.Find(id);
             if (item == null || item.ID != id)
@@ -140,7 +141,7 @@ namespace Api.Controllers
             return new NoContentResult();
         }
 
-        private bool Exists(int id)
+        private bool Exists(Guid id)
         {
             return (_repository.Find(id) != null) ? true : false;
         }

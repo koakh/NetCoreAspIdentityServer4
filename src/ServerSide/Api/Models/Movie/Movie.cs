@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Models.Movie
 {
     public class Movie
     {
         //The ID field is required by the DB for the primary key
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         public string Title { get; set; }
@@ -31,5 +33,7 @@ namespace Api.Models.Movie
         [StringLength(5)]
         [RegularExpression(@"^[A-E]+[a-eA-e''-'\s]*$")]
         public string Rating { get; set; }
+
+        public List<MovieReviews> Reviews { get; set; }
     }
 }

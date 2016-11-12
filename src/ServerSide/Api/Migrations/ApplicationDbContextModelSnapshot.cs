@@ -17,7 +17,7 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Api.Models.Movie.Actor", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
@@ -37,10 +37,10 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Api.Models.Movie.Movie", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ActorID");
+                    b.Property<Guid?>("ActorID");
 
                     b.Property<string>("Genre")
                         .IsRequired()
@@ -64,11 +64,39 @@ namespace Api.Migrations
                     b.ToTable("Movie");
                 });
 
+            modelBuilder.Entity("Api.Models.Movie.MovieReviews", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("MovieID");
+
+                    b.Property<string>("Review")
+                        .IsRequired()
+                        .HasMaxLength(1024);
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(60);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MovieID");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Api.Models.Movie.Movie", b =>
                 {
                     b.HasOne("Api.Models.Movie.Actor")
                         .WithMany("ActInMovies")
                         .HasForeignKey("ActorID");
+                });
+
+            modelBuilder.Entity("Api.Models.Movie.MovieReviews", b =>
+                {
+                    b.HasOne("Api.Models.Movie.Movie")
+                        .WithMany("Reviews")
+                        .HasForeignKey("MovieID");
                 });
         }
     }
