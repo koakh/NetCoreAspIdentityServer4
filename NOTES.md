@@ -19,6 +19,11 @@ git push -u origin master
 
 - [Pomelo](https://docs.microsoft.com/en-us/ef/core/providers/pomelo/)
 - [Pomelo EntityFrameworkCore MySql](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/blob/master/README.md#getting-started)
+
+Relationships
+
 - [EntitiFramework Relationships](https://docs.microsoft.com/en-us/ef/core/modeling/relationships#many-to-many)
+- [StackOverflow: How to create a many to many relationship with latest nightly builds of EF7?](http://stackoverflow.com/questions/29442493/how-to-create-a-many-to-many-relationship-with-latest-nightly-builds-of-ef7)
+
 - [Entity Framework Code First Data Annotations](https://msdn.microsoft.com/en-us/library/jj591583(v=vs.113).aspx)
 - [Bogus Help Page](https://github.com/bchavez/Bogus)
