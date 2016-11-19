@@ -9,7 +9,7 @@ namespace Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "post",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false)
@@ -19,11 +19,11 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.ID);
+                    table.PrimaryKey("PK_post", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tags",
+                name: "tag",
                 columns: table => new
                 {
                     ID = table.Column<string>(nullable: false)
@@ -31,7 +31,7 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tags", x => x.ID);
+                    table.PrimaryKey("PK_tag", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,8 +42,12 @@ namespace Api.Migrations
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     Age = table.Column<int>(nullable: false),
                     BornDate = table.Column<DateTime>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 60, nullable: true),
-                    LastName = table.Column<string>(maxLength: 60, nullable: true)
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true),
+                    FirstName = table.Column<string>(maxLength: 60, nullable: false),
+                    LastName = table.Column<string>(maxLength: 60, nullable: false),
+                    UserCreated = table.Column<string>(nullable: true),
+                    UserModified = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,11 +60,15 @@ namespace Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true),
                     Genre = table.Column<string>(maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     Rating = table.Column<string>(maxLength: 5, nullable: false),
                     ReleaseDate = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(maxLength: 60, nullable: true)
+                    Title = table.Column<string>(maxLength: 60, nullable: false),
+                    UserCreated = table.Column<string>(nullable: true),
+                    UserModified = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,34 +86,41 @@ namespace Api.Migrations
                 {
                     table.PrimaryKey("PK_PostTag", x => new { x.PostID, x.TagID });
                     table.ForeignKey(
-                        name: "FK_PostTag_Posts_PostID",
+                        name: "FK_PostTag_post_PostID",
                         column: x => x.PostID,
-                        principalTable: "Posts",
+                        principalTable: "post",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PostTag_Tags_TagID",
+                        name: "FK_PostTag_tag_TagID",
                         column: x => x.TagID,
-                        principalTable: "Tags",
+                        principalTable: "tag",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
+                name: "MovieActor",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(nullable: false)
-                        .Annotation("MySql:ValueGeneratedOnAdd", true),
                     MovieID = table.Column<Guid>(nullable: false),
-                    Review = table.Column<string>(maxLength: 1024, nullable: false),
-                    Title = table.Column<string>(maxLength: 60, nullable: true)
+                    ActorID = table.Column<Guid>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true),
+                    UserCreated = table.Column<string>(nullable: true),
+                    UserModified = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reviews", x => x.ID);
+                    table.PrimaryKey("PK_MovieActor", x => new { x.MovieID, x.ActorID });
                     table.ForeignKey(
-                        name: "FK_Reviews_Movie_MovieID",
+                        name: "FK_MovieActor_Actor_ActorID",
+                        column: x => x.ActorID,
+                        principalTable: "Actor",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovieActor_Movie_MovieID",
                         column: x => x.MovieID,
                         principalTable: "Movie",
                         principalColumn: "ID",
@@ -113,23 +128,24 @@ namespace Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovieToActor",
+                name: "moviereview",
                 columns: table => new
                 {
+                    ID = table.Column<Guid>(nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true),
                     MovieID = table.Column<Guid>(nullable: false),
-                    ActorID = table.Column<Guid>(nullable: false)
+                    Review = table.Column<string>(maxLength: 1024, nullable: false),
+                    Title = table.Column<string>(maxLength: 60, nullable: false),
+                    UserCreated = table.Column<string>(nullable: true),
+                    UserModified = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieToActor", x => new { x.MovieID, x.ActorID });
+                    table.PrimaryKey("PK_moviereview", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_MovieToActor_Actor_ActorID",
-                        column: x => x.ActorID,
-                        principalTable: "Actor",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MovieToActor_Movie_MovieID",
+                        name: "FK_moviereview_Movie_MovieID",
                         column: x => x.MovieID,
                         principalTable: "Movie",
                         principalColumn: "ID",
@@ -142,14 +158,14 @@ namespace Api.Migrations
                 column: "TagID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_MovieID",
-                table: "Reviews",
-                column: "MovieID");
+                name: "IX_MovieActor_ActorID",
+                table: "MovieActor",
+                column: "ActorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieToActor_ActorID",
-                table: "MovieToActor",
-                column: "ActorID");
+                name: "IX_moviereview_MovieID",
+                table: "moviereview",
+                column: "MovieID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -158,16 +174,16 @@ namespace Api.Migrations
                 name: "PostTag");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "MovieActor");
 
             migrationBuilder.DropTable(
-                name: "MovieToActor");
+                name: "moviereview");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "post");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "tag");
 
             migrationBuilder.DropTable(
                 name: "Actor");

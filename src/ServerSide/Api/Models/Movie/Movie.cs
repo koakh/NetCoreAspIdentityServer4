@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Models.Movie
 {
-    public class Movie
+    public class Movie : BaseEntity
     {
         //The ID field is required by the DB for the primary key
         public Guid ID { get; set; }
 
+        [Required]
         [StringLength(60, MinimumLength = 3)]
         public string Title { get; set; }
 
@@ -25,8 +26,9 @@ namespace Api.Models.Movie
         [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         public string Genre { get; set; }
 
-        [DataType(DataType.Currency)]
+        [Required]
         [Range(1, 100)]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Required]
@@ -35,7 +37,6 @@ namespace Api.Models.Movie
         public string Rating { get; set; }
 
         public List<MovieActor> MovieActors { get; set; }
-
         public List<MovieReview> Reviews { get; set; }
     }
 }

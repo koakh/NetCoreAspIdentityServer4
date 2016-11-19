@@ -83,7 +83,7 @@ namespace Api
             app.UseMvc();
 
             //Seed Data
-            SeedData.Initialize(app.ApplicationServices);
+            DbInitializer.Initialize(app.ApplicationServices);
         }
     }
 }

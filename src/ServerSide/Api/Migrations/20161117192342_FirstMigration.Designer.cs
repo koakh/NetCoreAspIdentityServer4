@@ -8,7 +8,7 @@ using Api.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161112212007_FirstMigration")]
+    [Migration("20161117192342_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace Api.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Posts");
+                    b.ToTable("post");
                 });
 
             modelBuilder.Entity("Api.Models.Blog.PostTag", b =>
@@ -50,7 +50,7 @@ namespace Api.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Tags");
+                    b.ToTable("tag");
                 });
 
             modelBuilder.Entity("Api.Models.Movie.Actor", b =>
@@ -62,11 +62,21 @@ namespace Api.Migrations
 
                     b.Property<DateTime>("BornDate");
 
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasMaxLength(60);
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
@@ -77,6 +87,10 @@ namespace Api.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
 
                     b.Property<string>("Genre")
                         .IsRequired()
@@ -91,17 +105,47 @@ namespace Api.Migrations
                     b.Property<DateTime>("ReleaseDate");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("Api.Models.Movie.MovieReviews", b =>
+            modelBuilder.Entity("Api.Models.Movie.MovieActor", b =>
+                {
+                    b.Property<Guid>("MovieID");
+
+                    b.Property<Guid>("ActorID");
+
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
+
+                    b.HasKey("MovieID", "ActorID");
+
+                    b.HasIndex("ActorID");
+
+                    b.ToTable("MovieActor");
+                });
+
+            modelBuilder.Entity("Api.Models.Movie.MovieReview", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
 
                     b.Property<Guid>("MovieID");
 
@@ -110,26 +154,18 @@ namespace Api.Migrations
                         .HasMaxLength(1024);
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
                     b.HasIndex("MovieID");
 
-                    b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("Api.Models.Movie.MovieToActor", b =>
-                {
-                    b.Property<Guid>("MovieID");
-
-                    b.Property<Guid>("ActorID");
-
-                    b.HasKey("MovieID", "ActorID");
-
-                    b.HasIndex("ActorID");
-
-                    b.ToTable("MovieToActor");
+                    b.ToTable("moviereview");
                 });
 
             modelBuilder.Entity("Api.Models.Blog.PostTag", b =>
@@ -145,23 +181,23 @@ namespace Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Models.Movie.MovieReviews", b =>
-                {
-                    b.HasOne("Api.Models.Movie.Movie", "Movie")
-                        .WithMany("Reviews")
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Api.Models.Movie.MovieToActor", b =>
+            modelBuilder.Entity("Api.Models.Movie.MovieActor", b =>
                 {
                     b.HasOne("Api.Models.Movie.Actor", "Actor")
-                        .WithMany("MovieToActor")
+                        .WithMany("MovieActors")
                         .HasForeignKey("ActorID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Api.Models.Movie.Movie", "Movie")
-                        .WithMany("MovieToActor")
+                        .WithMany("MovieActors")
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Models.Movie.MovieReview", b =>
+                {
+                    b.HasOne("Api.Models.Movie.Movie", "Movie")
+                        .WithMany("Reviews")
                         .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

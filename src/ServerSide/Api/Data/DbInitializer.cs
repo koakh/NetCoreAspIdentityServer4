@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Api.Data
 {
-    public class SeedData
+    public class DbInitializer
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {

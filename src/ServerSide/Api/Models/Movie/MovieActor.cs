@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Api.Models.Movie
 {
-    public class MovieActor
+    public class MovieActor : BaseEntity
     {
         public Guid MovieID { get; set; }
         public Movie Movie { get; set; }

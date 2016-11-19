@@ -1,6 +1,12 @@
-﻿using Api.Models.Blog;
+﻿using Api.Models;
+using Api.Models.Blog;
 using Api.Models.Movie;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Api.Data
 {
@@ -18,9 +24,12 @@ namespace Api.Data
         : base(options)
         { }
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    => optionsBuilder.UseMySql((@"server=localhost;database=IdentityServer4Api;uid=root;pwd=XXXXXX"));
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Movie
+            //Relationships : Movie
             modelBuilder.Entity<PostTag>()
                 .HasKey(t => new { t.PostID, t.TagID });
 
@@ -34,7 +43,7 @@ namespace Api.Data
                 .WithMany(t => t.PostTags)
                 .HasForeignKey(pt => pt.TagID);
 
-            //Blog
+            //Relationships : Blog
             modelBuilder.Entity<MovieActor>()
                 .HasKey(x => new { x.MovieID, x.ActorID });
 
@@ -49,7 +58,36 @@ namespace Api.Data
                 .HasForeignKey(pt => pt.ActorID);
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //    => optionsBuilder.UseMySql((@"server=localhost;database=IdentityServer4Api;uid=root;pwd=XXXXXX"));
+        public override int SaveChanges()
+        {
+            AddTimestamps();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            //var currentUsername = !string.IsNullOrEmpty(System.Web.HttpContext.Current?.User?.Identity?.Name)
+            //    ? HttpContext.Current.User.Identity.Name
+            //    : "Anonymous";
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((BaseEntity)entity.Entity).DateCreated = DateTime.UtcNow;
+                    //((BaseEntity)entity.Entity).UserCreated = currentUsername;
+                }
+
+                ((BaseEntity)entity.Entity).DateModified = DateTime.UtcNow;
+                //((BaseEntity)entity.Entity).UserModified = currentUsername;
+            }
+        }
     }
 }

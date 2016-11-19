@@ -23,17 +23,6 @@ namespace Api.Models.Movie
             return movie;
         }
 
-        public IEnumerable<Movie> SqlQuery(string query, params object[] parameters)
-        {
-            return _context.Movie.FromSql(query);
-        }
-
-        public async Task<IEnumerable<Movie>> SqlQueryAsync(string query, params object[] parameters)
-        {
-            //ToListAsync is an extension method on IQueryable<T> declared in System.Data.Entity.QueryableExtensions
-            return await _context.Movie.FromSql(query).ToListAsync();
-        }
-
         public Movie Find(Guid key, bool readOnly = false)
         {
             var movie = (!readOnly)
@@ -68,6 +57,17 @@ namespace Api.Models.Movie
             {
                 throw ex;
             }
+        }
+
+        public IEnumerable<Movie> SqlQuery(string query, params object[] parameters)
+        {
+            return _context.Movie.FromSql(query).ToList();
+        }
+
+        public async Task<IEnumerable<Movie>> SqlQueryAsync(string query, params object[] parameters)
+        {
+            //ToListAsync is an extension method on IQueryable<T> declared in System.Data.Entity.QueryableExtensions
+            return await _context.Movie.FromSql(query).ToListAsync();
         }
     }
 }

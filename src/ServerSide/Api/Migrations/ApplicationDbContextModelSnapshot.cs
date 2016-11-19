@@ -61,11 +61,21 @@ namespace Api.Migrations
 
                     b.Property<DateTime>("BornDate");
 
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasMaxLength(60);
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
@@ -76,6 +86,10 @@ namespace Api.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
 
                     b.Property<string>("Genre")
                         .IsRequired()
@@ -90,7 +104,12 @@ namespace Api.Migrations
                     b.Property<DateTime>("ReleaseDate");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
@@ -102,6 +121,14 @@ namespace Api.Migrations
                     b.Property<Guid>("MovieID");
 
                     b.Property<Guid>("ActorID");
+
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("MovieID", "ActorID");
 
@@ -115,6 +142,10 @@ namespace Api.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
                     b.Property<Guid>("MovieID");
 
                     b.Property<string>("Review")
@@ -122,7 +153,12 @@ namespace Api.Migrations
                         .HasMaxLength(1024);
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<string>("UserCreated");
+
+                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
