@@ -21,7 +21,7 @@ namespace Api
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            //User-Secrets
+            //User-Secrets : Uncomment if run outside VS (Non Development) else fails in login to MySql
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();
@@ -61,6 +61,8 @@ namespace Api
             //Register the repositories in DI container
             services.AddSingleton<ITodoRepository, TodoRepository>();
             services.AddSingleton<IMovieRepository, MovieRepository>();
+
+            services.AddLogging();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

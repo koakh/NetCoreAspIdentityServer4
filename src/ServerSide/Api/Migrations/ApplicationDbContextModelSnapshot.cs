@@ -73,10 +73,6 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
-
                     b.HasKey("ID");
 
                     b.ToTable("Actor");
@@ -107,10 +103,6 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
-
                     b.HasKey("ID");
 
                     b.ToTable("Movie");
@@ -125,10 +117,6 @@ namespace Api.Migrations
                     b.Property<DateTime?>("DateCreated");
 
                     b.Property<DateTime?>("DateModified");
-
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
 
                     b.HasKey("MovieID", "ActorID");
 
@@ -155,10 +143,6 @@ namespace Api.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(60);
-
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 

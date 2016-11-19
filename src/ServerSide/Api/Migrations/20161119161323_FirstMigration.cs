@@ -14,8 +14,8 @@ namespace Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    Content = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,14 +40,12 @@ namespace Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    Age = table.Column<int>(nullable: false),
-                    BornDate = table.Column<DateTime>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: true),
-                    DateModified = table.Column<DateTime>(nullable: true),
                     FirstName = table.Column<string>(maxLength: 60, nullable: false),
                     LastName = table.Column<string>(maxLength: 60, nullable: false),
-                    UserCreated = table.Column<string>(nullable: true),
-                    UserModified = table.Column<string>(nullable: true)
+                    BornDate = table.Column<DateTime>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,15 +58,13 @@ namespace Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    DateCreated = table.Column<DateTime>(nullable: true),
-                    DateModified = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(maxLength: 60, nullable: false),
+                    ReleaseDate = table.Column<DateTime>(nullable: false),
                     Genre = table.Column<string>(maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     Rating = table.Column<string>(maxLength: 5, nullable: false),
-                    ReleaseDate = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(maxLength: 60, nullable: false),
-                    UserCreated = table.Column<string>(nullable: true),
-                    UserModified = table.Column<string>(nullable: true)
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,9 +102,7 @@ namespace Api.Migrations
                     MovieID = table.Column<Guid>(nullable: false),
                     ActorID = table.Column<Guid>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: true),
-                    DateModified = table.Column<DateTime>(nullable: true),
-                    UserCreated = table.Column<string>(nullable: true),
-                    UserModified = table.Column<string>(nullable: true)
+                    DateModified = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,13 +127,11 @@ namespace Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    DateCreated = table.Column<DateTime>(nullable: true),
-                    DateModified = table.Column<DateTime>(nullable: true),
-                    MovieID = table.Column<Guid>(nullable: false),
-                    Review = table.Column<string>(maxLength: 1024, nullable: false),
                     Title = table.Column<string>(maxLength: 60, nullable: false),
-                    UserCreated = table.Column<string>(nullable: true),
-                    UserModified = table.Column<string>(nullable: true)
+                    Review = table.Column<string>(maxLength: 1024, nullable: false),
+                    MovieID = table.Column<Guid>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

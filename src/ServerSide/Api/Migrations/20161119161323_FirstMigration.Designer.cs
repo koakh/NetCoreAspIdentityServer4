@@ -8,7 +8,7 @@ using Api.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161117192342_FirstMigration")]
+    [Migration("20161119161323_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,10 +74,6 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
-
                     b.HasKey("ID");
 
                     b.ToTable("Actor");
@@ -108,10 +104,6 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
-
                     b.HasKey("ID");
 
                     b.ToTable("Movie");
@@ -126,10 +118,6 @@ namespace Api.Migrations
                     b.Property<DateTime?>("DateCreated");
 
                     b.Property<DateTime?>("DateModified");
-
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
 
                     b.HasKey("MovieID", "ActorID");
 
@@ -156,10 +144,6 @@ namespace Api.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(60);
-
-                    b.Property<string>("UserCreated");
-
-                    b.Property<string>("UserModified");
 
                     b.HasKey("ID");
 
